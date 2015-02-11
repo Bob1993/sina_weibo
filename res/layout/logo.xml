@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+ 	android:background="@drawable/background" 
+ 	android:gravity="center">
+ 	<!-- 在这里，gravity表示让其内部的控件的位置，layout_gravity表示其本身在parent中的位置 -->
+    <ImageView
+       	android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/weibo_logo"
+        android:contentDescription="@string/logo_for_the_first_frame"
+        />
+
+</LinearLayout>

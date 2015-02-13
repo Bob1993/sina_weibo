@@ -13,8 +13,11 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
+        <!-- 注册主活动 -->
+        <service android:name=".logic.MainService"></service>
         <activity
-            android:name=".LogoActivity"
+            android:name="com.bob.sina_weibo.ui.LogoActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name="com.bob.sina_weibo.ui.LoginActivity"></activity>
     </application>
 
 </manifest>

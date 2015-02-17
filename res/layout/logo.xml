@@ -8,7 +8,7 @@
     <ImageView
        	android:id="@+id/logo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="90dip"
         android:src="@drawable/weibo_logo"
         android:contentDescription="@string/logo_for_the_first_frame"
         />

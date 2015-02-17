@@ -39,9 +39,9 @@ public class LogoActivity extends Activity{
 			}
 			
 			@Override
-			public void onAnimationEnd(Animation animation) {
+			public void onAnimationEnd(Animation animation) {//动画结束后的跳转动作
 				// TODO Auto-generated method stub
-				Intent intent= new Intent(LogoActivity.this, LoginActivity.class);
+				Intent intent= new Intent(LogoActivity.this, AuthActivity.class);
 				startActivity(intent);
 			}
 		});

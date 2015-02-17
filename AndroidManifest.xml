@@ -16,8 +16,9 @@
         
         <!-- 注册主服务 -->
         <service android:name=".logic.MainService"></service>
+        
         <activity
-            android:name="com.bob.sina_weibo.ui.LogoActivity"
+            android:name=".ui.LogoActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +26,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.bob.sina_weibo.ui.LoginActivity"></activity>
-    </application>
+        
+        <activity android:name=".ui.LoginActivity" android:theme="@style/theme_full_screen"></activity>
+  		<activity android:name=".ui.AuthActivity" android:theme="@style/theme_full_screen"></activity>
+     </application>
 
 </manifest>

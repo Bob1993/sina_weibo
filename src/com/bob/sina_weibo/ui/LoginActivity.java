@@ -21,13 +21,11 @@ public class LoginActivity extends Activity implements IWeiboActivity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
-		button= (Button) findViewById(R.id.Button);
-		textView= (TextView) findViewById(R.id.textView);
 		
 		/*
 		 * 启动主服务
 		 */
-		Intent intent= new Intent(this,MainService.class);
+		/*Intent intent= new Intent(this,MainService.class);
 		startService(intent);
 		
 		button.setOnClickListener(new OnClickListener() {
@@ -36,10 +34,10 @@ public class LoginActivity extends Activity implements IWeiboActivity{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				
-				MainService.newTask(new Task(Task.TASK_LOGIN, null));//为任务队列发送一条新任务
+				MainService.newTask(new Task(Task.TASK_LOGIN, null));//为任务队列发送一条新任务，也就是插入
 			}
 		});
-		MainService.addActivity(this);
+		MainService.addActivity(this);*/
 	}
 
 	@Override
@@ -51,6 +49,6 @@ public class LoginActivity extends Activity implements IWeiboActivity{
 	@Override
 	public void refresh(Object... params) {//刷新当前活动的UI方法
 		// TODO Auto-generated method stub
-		textView.setText(params[0].toString());
+		textView.setText(params[0].toString());//可变参数是采用数组的形式来获取元素，其实本质也就是数组
 	}
 }

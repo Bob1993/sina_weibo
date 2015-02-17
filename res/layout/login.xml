@@ -2,18 +2,52 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:orientation="vertical" >
-    <TextView 
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
+    
+    <Button
+        android:id="@+id/add_account"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="10dip"
+        android:background="@drawable/add_account" />
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
         android:gravity="center"
-        android:text="@string/hello_i_am_loginactivity"
-        />
-	<Button 
-	    android:id="@+id/Button"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:text="@string/Login"
-	    />
+        android:layout_marginTop="120dip"
+        >
+
+        <ImageView
+            android:id="@+id/user_head"
+            android:layout_width="120dip"
+            android:layout_height="120dip"
+            android:src="@drawable/user_head"
+             />
+        
+        <Spinner
+         android:id="@+id/spinner_user_list"
+         android:layout_width="200dip"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="25dip"
+         android:layout_gravity="center"
+         android:background="@drawable/account_select" />
+    </LinearLayout>
+    
+    <Button
+    android:id="@+id/btn_login"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/button_login"
+    android:layout_marginTop="50dp"
+    android:layout_gravity="center"
+	android:textColor="@color/white"
+	android:text="@string/Login"
+	android:textSize="23sp"
+    />
 </LinearLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="theme_full_screen"  parent="android:Theme.Black">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">?android:windowNoTitle</item>  <!-- 全屏的值引用了没有标题的值 -->
+    </style>
+</resources>

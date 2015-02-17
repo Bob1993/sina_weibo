@@ -27,7 +27,7 @@ public class MainService extends Service implements Runnable{
 			switch (msg.what) {
 			case Task.TASK_LOGIN://如果是在子线程中处理的是登录任务的话，
 				IWeiboActivity activity= (IWeiboActivity) getActivityByName("LoginActivity");//强制向上转型
-				activity.refresh(msg.obj);
+				activity.refresh(msg.obj);//因为UI更新需要活动做载体，所以在任何时候都别忘了将活动添加到队列中
 				break;
 
 			default:
@@ -77,7 +77,7 @@ public class MainService extends Service implements Runnable{
 		Message msg= handler.obtainMessage();
 		switch (t.getTaskId()) {//根据队列中任务的类型来分别做处理
 		case Task.TASK_LOGIN://处理登录作业并将更新消息发给主线程里的Handle
-			msg.what= Task.TASK_LOGIN;
+			msg.what= Task.TASK_LOGIN;//模拟处理登陆任务并返回UI更新元素
 			msg.obj= "登录成功";
 			handler.sendMessage(msg);
 			break;
@@ -87,12 +87,12 @@ public class MainService extends Service implements Runnable{
 		}
 	}
 	
-	public static void newTask(Task t)
+	public static void newTask(Task t)//为任务队列添加任务
 	{
 		tasks.add(t);
 	}
 	
-	public static void addActivity(Activity activity)
+	public static void addActivity(Activity activity)//为活动数组添加新成员
 	{
 		appActivities.add(activity);
 	}

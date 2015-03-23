@@ -7,6 +7,7 @@ public class Task {
 	 * 定义多个静态常量来区分task的种类
 	 */
 	public static final int TASK_LOGIN= 0;
+	public static final int GET_USERINFO_BY_TOKEN= 1;
 	
 	private int taskId;//任务id
 	private Map<String ,Object> taskParams;//任务内容

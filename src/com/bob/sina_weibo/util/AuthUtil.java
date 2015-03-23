@@ -53,7 +53,7 @@ public class AuthUtil {// 认证工具类
 			String token = values.getString("access_token");
 			String expires_in = values.getString("expires_in");
 			accessToken = new Oauth2AccessToken(token, expires_in);//包装生成access
-
+			LogUtil.i("test", "oncomplete is called");
 			 /*去除Cookie，防止拿原来授权的帐号自动授权*/
 			CookieSyncManager.createInstance(context);
 			CookieSyncManager.getInstance().startSync();

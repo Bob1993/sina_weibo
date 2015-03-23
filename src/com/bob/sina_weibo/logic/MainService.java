@@ -5,6 +5,10 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import com.bob.sina_weibo.bean.Task;
+import com.bob.sina_weibo.bean.UserInfo;
+import com.bob.sina_weibo.db.UserInfoServices;
+import com.bob.sina_weibo.util.LoginUserUtil;
+import com.weibo.sdk.android.Oauth2AccessToken;
 
 import android.app.Activity;
 import android.app.Service;
@@ -22,14 +26,20 @@ public class MainService extends Service implements Runnable{
 	private boolean isRun= false;//判断是否启动扫描循环的标识符
 	
 	Handler handler= new Handler(){//使用匿名内部类来实现对类的继承
-		
+		IWeiboActivity activity= null;
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case Task.TASK_LOGIN://如果是在子线程中处理的是登录任务的话，
-				IWeiboActivity activity= (IWeiboActivity) getActivityByName("LoginActivity");//强制向上转型
+				activity= (IWeiboActivity) getActivityByName("LoginActivity");//强制向上转型
 				activity.refresh(msg.obj);//因为UI更新需要活动做载体，所以在任何时候都别忘了将活动添加到队列中
 				break;
-
+				//通过Token从微博API获取用户信息，并保存到数据库操作	
+			
+			case Task.GET_USERINFO_BY_TOKEN:
+				activity= (IWeiboActivity) getActivityByName("AuthActivity");//强制向上转型
+				activity.refresh(msg.obj);
+				break;
+				
 			default:
 				break;
 			}
@@ -83,12 +93,48 @@ public class MainService extends Service implements Runnable{
 		case Task.TASK_LOGIN://处理登录作业并将更新消息发给主线程里的Handle
 			msg.what= Task.TASK_LOGIN;//模拟处理登陆任务并返回UI更新元素
 			msg.obj= "登录成功";
-			handler.sendMessage(msg);
 			break;
+		case Task.GET_USERINFO_BY_TOKEN:
+		{
+			    Oauth2AccessToken access_token=(Oauth2AccessToken)t.getTaskParams().get("token");
+				
+			    //1.先通过Token获取Uid
+			    
+				//请求获取uid
+	        	String uid="";
+	        	LoginUserUtil.reqUID(access_token);
+	        	//获取uid
+	        	do{
+	        		uid=LoginUserUtil.getUID();
+	        	}while(uid.equals(""));
+	        	
+	        	//2.通过uid，token获取UserInfo
+	        	
+	        	//请求获取用户信息
+	        	long _uid=Long.parseLong(uid);
+	        	UserInfo user=new UserInfo();
+	        	LoginUserUtil.reqUserInfo(access_token, _uid);
+	        	//获取UserInfo
+	        	do{
+	        		user=LoginUserUtil.getUserInfo();
+	        	}while(user.getUserName().equals(""));		        	
+	        	user.setUserId(uid);
 
+	        	//3.把UserInfo的数据保存到数据库
+	        	//创建数据库
+	        	UserInfoServices db=new UserInfoServices(getActivityByName("AuthActivity"));
+	        	//如果该数据不存在数据库中
+	        	if(db.getUserInfoByUserId(uid)==null){
+	        		db.insertUserInfo(user);    
+	        	}      
+	        	msg.obj="用户存储成功";
+			}
+			break;
+			
 		default:
 			break;
 		}
+		handler.sendMessage(msg);
 	}
 	
 	public static void newTask(Task t)//为任务队列添加任务
@@ -99,6 +145,11 @@ public class MainService extends Service implements Runnable{
 	public static void addActivity(Activity activity)//为活动数组添加新成员
 	{
 		appActivities.add(activity);
+	}
+	
+	public static void removeActivity(Activity activity)
+	{
+		appActivities.remove(activity);
 	}
 	
 	public Activity getActivityByName(String name)//根据活动名称来从活动数组中获取活动

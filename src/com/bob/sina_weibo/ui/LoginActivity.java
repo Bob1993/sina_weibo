@@ -13,8 +13,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class LoginActivity extends Activity implements IWeiboActivity{
-	private Button button;
+public class LoginActivity extends Activity implements IWeiboActivity{//界面需要刷新的活动都需要实现IWeiboActivity接口
+	
 	private TextView textView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +25,13 @@ public class LoginActivity extends Activity implements IWeiboActivity{
 		/*
 		 * 启动主服务
 		 */
-		/*Intent intent= new Intent(this,MainService.class);
-		startService(intent);
+		Intent services= new Intent(this,MainService.class);
+		startService(services);
 		
-		button.setOnClickListener(new OnClickListener() {
+		Intent intent= new Intent(this,AuthActivity.class);//跳转至AuthActivity活动
+		startActivity(intent);
+		
+		/*button.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {

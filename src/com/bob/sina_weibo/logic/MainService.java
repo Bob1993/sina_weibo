@@ -15,7 +15,7 @@ import android.os.Message;
 
 public class MainService extends Service implements Runnable{
 	/*
-	 * 之所以要做成静态的，1是为了让静态方法能狗访问到。2是只能有一份的任务队列和活动数组
+	 * 之所以要做成静态的，1是为了让静态方法能够访问到。2是只能有一份的任务队列和活动数组
 	 */
 	private static Queue<Task> tasks= new LinkedList<Task>();//创建任务队列
 	private static ArrayList<Activity> appActivities= new ArrayList<Activity>();//创建存储各种活动的数组，在这里不建议面向接口编程，会影响效率
@@ -33,8 +33,12 @@ public class MainService extends Service implements Runnable{
 			default:
 				break;
 			}
-		};
+		}
 	};
+	/*
+	 *在这里，整个MainService就是一个子线程，用来不断扫描任务队列以达到异步处理任务的效果
+	 * @see android.app.Service#onCreate()
+	 */
 	@Override
 	public void onCreate() {//在服务创建的时候就开始启动扫描任务队列的线程
 		// TODO Auto-generated method stub

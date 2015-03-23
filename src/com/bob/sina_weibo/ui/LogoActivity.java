@@ -8,6 +8,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.ImageView;
 
@@ -22,7 +23,8 @@ public class LogoActivity extends Activity{
 		setContentView(R.layout.logo);
 		
 		imageView= (ImageView) findViewById(R.id.logo);
-		AlphaAnimation animation= new AlphaAnimation(0.0f, 1.0f);//两个浮点数，分别表示动画的起点透明度和终点透明度，在0.0~1.0之间
+	//	AlphaAnimation animation= new AlphaAnimation(0.0f, 1.0f);//两个浮点数，分别表示动画的起点透明度和终点透明度，在0.0~1.0之间
+		TranslateAnimation animation= new TranslateAnimation(100.0f, 0.0f, 100.0f, 0.0f);
 		animation.setDuration(3000);//设置动画持续时间
 		animation.setAnimationListener(new AnimationListener() {//设置动画监听,否则就会直接执行完后边的跳转语句，覆盖掉应有的动画效果
 			
@@ -41,7 +43,7 @@ public class LogoActivity extends Activity{
 			@Override
 			public void onAnimationEnd(Animation animation) {//动画结束后的跳转动作
 				// TODO Auto-generated method stub
-				Intent intent= new Intent(LogoActivity.this, AuthActivity.class);
+				Intent intent= new Intent(LogoActivity.this, LoginActivity.class);
 				startActivity(intent);
 			}
 		});

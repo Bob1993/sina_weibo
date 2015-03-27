@@ -25,7 +25,7 @@ public class UserInfo {
 	public static final String USER_ICON="userIcon";
 	
 	public UserInfo(long id, String userId, String userName, String token,
-			String isDefault) {//暂时就先不存储图像了
+			String isDefault) {
 		super();
 		this.id = id;
 		this.userId = userId;

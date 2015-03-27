@@ -56,7 +56,6 @@ public class UserInfoServices {
 				cursor.moveToFirst();
 				user = new UserInfo();
 				Long id =cursor.getLong(cursor.getColumnIndex(UserInfo.ID));//6个参数的查询
-				String uId = cursor.getString(cursor.getColumnIndex(UserInfo.USER_ID));
 				String userName = cursor.getString(cursor.getColumnIndex(UserInfo.USER_NAME));
 				String token = cursor.getString(cursor.getColumnIndex(UserInfo.TOKEN));
 				String isDefault= cursor.getString(cursor.getColumnIndex(UserInfo.IS_DEFAULT));
